@@ -8,7 +8,7 @@ public class UserInterface : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public void OnPointerEnter(PointerEventData eventData)
     {
         MouseData.mouseOverPanelTransform = this.gameObject.transform;
-        Debug.Log(MouseData.mouseOverPanelTransform.gameObject.name);
+        //Debug.Log(MouseData.mouseOverPanelTransform.gameObject.name);
     }
 
     public void OnPointerExit(PointerEventData eventData)

@@ -6,17 +6,11 @@ using System.Data;
 
 public class DBManager : MonoBehaviour
 {
-    #region Variables
-
     public static DBManager _DB_MANAGER;
 
     private List<PotionType> potionTypes = new List<PotionType>();
     private List<Potion> potions = new List<Potion>();
     private List<Ingredient> ingredients = new List<Ingredient>();
-
-    #endregion
-
-    #region Main Methods
     private void Awake()
     {
         if (_DB_MANAGER != null && _DB_MANAGER != this)
@@ -29,10 +23,8 @@ public class DBManager : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
     private void Start()
     {
-        Debug.Log("Abriendo BD");
         OpenDatabase();
         GetPotionTypes();
         GetPotions();
@@ -43,28 +35,15 @@ public class DBManager : MonoBehaviour
         }*/
     }
 
-    // Update is called once per frame
-    private void Update()
-    {
-        
-    }
-
-    #endregion
-
-    #region DB Connection
-
     IDbConnection dbConnection;
 
     private void OpenDatabase()
     {
-        string dbUri = "URI=file:alchentimistDB.db";
+        string dbUri = "URI=file:alchENTImist.db";
         dbConnection = new SqliteConnection(dbUri);
         dbConnection.Open();
     }
 
-    #endregion
-
-    #region DB Read
     public void GetPotionTypes()
     {
         string query = "SELECT * FROM potion_types";
@@ -85,7 +64,6 @@ public class DBManager : MonoBehaviour
         }
 
     }
-
     public void GetPotions()
     {
         string query = "SELECT * FROM potions";
@@ -124,7 +102,7 @@ public class DBManager : MonoBehaviour
         {
             Ingredient newIngredient = new Ingredient();
             newIngredient.id_ingredient = dataReader.GetInt32(0);
-            Debug.Log(newIngredient.id_ingredient);
+            //Debug.Log(newIngredient.id_ingredient);
             newIngredient.ingredient = dataReader.GetString(1);
             //Debug.Log(newIngredient.ingredient);
             newIngredient.cost = dataReader.GetFloat(2);
@@ -137,7 +115,6 @@ public class DBManager : MonoBehaviour
             ingredients.Add(newIngredient);
         }
     }
-
     public List<int> IngredientsNeeded(int _id_potion)
     {
         string query = "SELECT * FROM potions_ingredients WHERE id_potion=" + _id_potion.ToString();
@@ -160,7 +137,7 @@ public class DBManager : MonoBehaviour
 
     public List<int> CheckFirstIngredientAdded(int _id_ingredient)
     {
-        string query = "SELECT * FROM potions_ingredients WHERE id_ingredient=" + _id_ingredient.ToString();
+        string query = "SELECT * FROM potion_ingredients WHERE id_ingredient=" + _id_ingredient.ToString();
         IDbCommand cmd = dbConnection.CreateCommand();
         cmd.CommandText = query;
 
@@ -177,10 +154,9 @@ public class DBManager : MonoBehaviour
         }
         return id_potions;
     }
-
     public List<int> CheckIngredients(List<int> _id_ingredient)
     {
-        string query = "SELECT * FROM potions_ingredients WHERE id_ingredient IN(";
+        string query = "SELECT * FROM potion_ingredients WHERE id_ingredient IN(";
 
         if (_id_ingredient.Count > 1)
         {
@@ -243,7 +219,6 @@ public class DBManager : MonoBehaviour
         string potionName = dataReader.GetString(1);
         return potionName;
     }
-    #endregion
 
     public List<Ingredient> GetIngredientsList() { return ingredients; }
 }
