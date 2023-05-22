@@ -117,7 +117,7 @@ public class DBManager : MonoBehaviour
     }
     public List<int> IngredientsNeeded(int _id_potion)
     {
-        string query = "SELECT * FROM potions_ingredients WHERE id_potion=" + _id_potion.ToString();
+        string query = "SELECT * FROM potion_ingredients WHERE id_potion=" + _id_potion.ToString();
         IDbCommand cmd = dbConnection.CreateCommand();
         cmd.CommandText = query;
 
@@ -146,7 +146,6 @@ public class DBManager : MonoBehaviour
         List<int> id_potions = new List<int>();
         while (dataReader.Read())
         {
-
             int ingredient = dataReader.GetInt16(3);
             Debug.Log(ingredient);
 
@@ -175,7 +174,6 @@ public class DBManager : MonoBehaviour
         }
         else if (_id_ingredient.Count == 1) {
             query += _id_ingredient[0];
-
         }
         IDbCommand cmd = dbConnection.CreateCommand();
         cmd.CommandText = query;
@@ -201,9 +199,7 @@ public class DBManager : MonoBehaviour
                 id_potions.Add(id_ingredient);
                 ingredients_quantity++;
                 Debug.Log(id_ingredient);
-            }
-
-            
+            }           
         }
         return id_potions;
     }

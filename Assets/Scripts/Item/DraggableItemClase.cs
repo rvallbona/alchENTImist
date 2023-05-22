@@ -40,8 +40,8 @@ public class DraggableItemClase : MonoBehaviour, IBeginDragHandler, IDragHandler
                 {
                     slotAvailable.GetComponent<TextMeshProUGUI>().text = MouseData.tempItemBeingDragged.GetComponentInChildren<TextMeshProUGUI>().text;
                     slotAvailable.GetComponent<TextMeshProUGUI>().text = MouseData.tempItemBeingDragged.GetComponentInChildren<TextMeshProUGUI>().text;
-                    slotAvailable.GetComponent<IngredientInfo>().SetID(MouseData.tempItemBeingDragged.GetComponent<IngredientInfo>().GetID());
-                    slotAvailable.GetComponent<IngredientInfo>().SetIngredientName(MouseData.tempItemBeingDragged.GetComponent<IngredientInfo>().GetIngredientName());
+                    slotAvailable.GetComponent<IngredientInfo>().SetI_ID(MouseData.tempItemBeingDragged.GetComponent<IngredientInfo>().GetI_ID());
+                    slotAvailable.GetComponent<IngredientInfo>().SetI_Name(MouseData.tempItemBeingDragged.GetComponent<IngredientInfo>().GetI_Name());
                     Destroy(MouseData.tempItemBeingDragged);
                     MouseData.tempItemBeingDragged = null;
                 }

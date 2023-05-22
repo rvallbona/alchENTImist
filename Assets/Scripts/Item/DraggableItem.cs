@@ -40,7 +40,7 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
                 if (slotAvailable != null)
                 {
                     slotAvailable.GetComponent<TextMeshProUGUI>().text = MouseData.tempItemBeingDragged.GetComponentInChildren<TextMeshProUGUI>().text;
-                    m_craft_manager.AddIngredient(this.gameObject.GetComponent<IngredientInfo>().GetID());
+                    m_craft_manager.AddIngredient(this.gameObject.GetComponent<IngredientInfo>().GetI_ID());
                     m_craft_manager.CheckIngredientBool(true);
                     Destroy(MouseData.tempItemBeingDragged);
                     MouseData.tempItemBeingDragged = null;
