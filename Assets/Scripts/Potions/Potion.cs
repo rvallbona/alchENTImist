@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Potion : MonoBehaviour
+//[CreateAssetMenu(fileName = "New Potion", menuName = "Potions/Potion")]
+public class Potion
 {
     public int id_potion;
-    public string name_potion;
+    public string potion;
     public float cost;
     public string icon;
     public string description;
