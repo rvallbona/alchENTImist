@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6540297035514870930}
   - component: {fileID: 5973553861380813827}
   - component: {fileID: 3904436188955550141}
+  - component: {fileID: 4965858473453105531}
   m_Layer: 5
   m_Name: Potion
   m_TagString: Untagged
@@ -135,3 +136,18 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &4965858473453105531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9100488338292330422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63015e0d21da53546b10cb50c5d430ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id_potion: 0
+  name_potion: 
+  description_potion: 

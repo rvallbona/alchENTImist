@@ -606,10 +606,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 311790252}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d021f791fa045c45b007b79b88f1e92, type: 3}
+  m_Script: {fileID: 11500000, guid: 43466e32cd9a74245be316b033dff7e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ingredient: {fileID: 7480963258606411685, guid: cbac7ea8c26c1774199dacede0ae0327, type: 3}
+  ingredientPrefab: {fileID: 7480963258606411685, guid: cbac7ea8c26c1774199dacede0ae0327, type: 3}
 --- !u!1 &339300299
 GameObject:
   m_ObjectHideFlags: 0
@@ -628,7 +628,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &339300300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1574,12 +1574,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9975588a67f28454190a7c38a44f2962, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dbManager: {fileID: 2045331860}
-  ingredients_ids: []
-  idIngredient: 
-  idsIngredientsList: []
-  potion: {fileID: 1615750073}
-  id_potion_created: 0
+  result: {fileID: 1759390548}
 --- !u!114 &569948896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3158,7 +3153,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 31ac6e8096b5dba4b8094191ac6d891a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7066e0747291df44fa5c2bf93bee3a6e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4212,15 +4207,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 4d6a99baee23b654f9e4bb672ae0b438, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -5025,7 +5020,7 @@ GameObject:
   - component: {fileID: 1533848423}
   - component: {fileID: 1533848422}
   m_Layer: 0
-  m_Name: MenuManager
+  m_Name: MenuControl
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5050,7 +5045,6 @@ MonoBehaviour:
   canvasCredits: {fileID: 1451088323}
   canvasRecipies: {fileID: 1182786685}
   canvasWin: {fileID: 774790596}
-  potion: {fileID: 1615750073}
 --- !u!4 &1533848423
 Transform:
   m_ObjectHideFlags: 0
@@ -5358,12 +5352,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1615750071}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d00b8a077ce2a44388ae620399dd0ad, type: 3}
+  m_Script: {fileID: 11500000, guid: d06079956eae69d4589a9283246284af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  potion: {fileID: 9100488338292330422, guid: 80c5b6fb7a738a54f9a5989fa4066bc0, type: 3}
-  slot: {fileID: 569948895}
-  indexWin: 0
+  potionPrefab: {fileID: 9100488338292330422, guid: 80c5b6fb7a738a54f9a5989fa4066bc0, type: 3}
 --- !u!114 &1615750074
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5788,8 +5780,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27e0f22906b40ad4cabeaf5ee1547da9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  potion: {fileID: 9100488338292330422, guid: 80c5b6fb7a738a54f9a5989fa4066bc0, type: 3}
-  slot: {fileID: 569948895}
+  potionPrefab: {fileID: 9100488338292330422, guid: 80c5b6fb7a738a54f9a5989fa4066bc0, type: 3}
 --- !u!1 &1832399110
 GameObject:
   m_ObjectHideFlags: 0
@@ -5820,7 +5811,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   usernameInput: {fileID: 1200494340}
-  menuManager: {fileID: 1533848422}
+  menuControl: {fileID: 1533848422}
 --- !u!4 &1832399112
 Transform:
   m_ObjectHideFlags: 0
@@ -6037,8 +6028,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4933eac2a47b12742b46bf146e8951e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dbManager: {fileID: 0}
   potion: {fileID: 9100488338292330422, guid: 80c5b6fb7a738a54f9a5989fa4066bc0, type: 3}
   ingredient: {fileID: 7480963258606411685, guid: cbac7ea8c26c1774199dacede0ae0327, type: 3}
+  idPotionsList: 
+  idIngredientsList: 
+  idPotionsIngredients: 
+  idPotions: 
+  namePotionsList: []
+  nameIngredientsList: []
+  idIngredients: []
 --- !u!1 &1988047099
 GameObject:
   m_ObjectHideFlags: 0
@@ -6057,7 +6056,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1988047100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6126,8 +6125,8 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1988047099}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -862.52057}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6143,20 +6142,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -1.3471669, y: -0.29924852}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &2045331860 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3800300448843595429, guid: a65ae68f5fe799f468b7a2b3d20b77b6, type: 3}
-  m_PrefabInstance: {fileID: 3800300450318464817}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3298a188bf54934ab2d29cc2c5040ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &2045331861 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3800300448843595428, guid: a65ae68f5fe799f468b7a2b3d20b77b6, type: 3}
