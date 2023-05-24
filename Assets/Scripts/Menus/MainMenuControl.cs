@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class MainMenuControl : MonoBehaviour
 {
     [Header("Canvas")]
-    [SerializeField] GameObject canvasLoggin, canvasMainMenu, canvasInGame, canvasOptions, canvasCredits, canvasRecipies, canvasWin;
+    [SerializeField] GameObject canvasLoggin, canvasMainMenu, canvasInGame, canvasOptions, canvasCredits, canvasRecipies, canvasWin, canvasRegister;
     private void Update()
     {
         //CheckWin();
@@ -14,6 +14,11 @@ public class MainMenuControl : MonoBehaviour
     {
         canvasInGame.SetActive(true);
         canvasMainMenu.SetActive(false);
+    }
+    public void ChangeRegisterCanvas()
+    {
+        canvasRegister.SetActive(true);
+        canvasLoggin.SetActive(false);
     }
     public void ChangeOptionCanvas()
     {
@@ -49,6 +54,11 @@ public class MainMenuControl : MonoBehaviour
     {
         canvasCredits.SetActive(false);
         canvasMainMenu.SetActive(true);
+    }
+    public void BackLoggin()
+    {
+        canvasRegister.SetActive(false);
+        canvasLoggin.SetActive(true);
     }
     public void Logged()
     {

@@ -2,6 +2,8 @@ using Mono.Data.Sqlite;
 using System.Data;
 using UnityEngine;
 using System.Collections.Generic;
+using System;
+
 public class DBManager : MonoBehaviour
 {
     public static DBManager _DB_MANAGER;
@@ -54,6 +56,29 @@ public class DBManager : MonoBehaviour
     {
         return name_user;
     }
+    //------ REGISTER FUNC
+    public void CreateUser(string userName)
+    {
+
+        string query = "INSERT INTO users (name, date, level) VALUES ('" + userName.ToString() + "','" + DateTime.Now.Date.ToString("yyyy-MM-dd") + "', 1)";
+
+        IDbCommand cmd = dbConnection.CreateCommand();
+        cmd.CommandText = query;
+
+        IDataReader dataReader = cmd.ExecuteReader();
+    }
+
+    public void CreateBankAccount(int userID)
+    {
+
+        string query = "INSERT INTO bank_accounts (banalce, id_user) VALUES (1000, " + userID.ToString() + ")";
+
+        IDbCommand cmd = dbConnection.CreateCommand();
+        cmd.CommandText = query;
+
+        IDataReader dataReader = cmd.ExecuteReader();
+    }
+
 
     //------ INGREDIENTS FUNC
     public List<int> GetIngredientIDList()
