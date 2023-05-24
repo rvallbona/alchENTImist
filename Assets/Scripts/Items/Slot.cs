@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 using TMPro;
 using System;
 using System.Linq;
+using Unity.VisualScripting;
 
 public class Slot : MonoBehaviour, IDropHandler
 {
@@ -16,12 +17,14 @@ public class Slot : MonoBehaviour, IDropHandler
     int id_potion_toSpawn;
     bool canSpawnPotion;
     int indexPotionIngredients;
+    GridLayoutGroup gridLayoutGroup;
     public void OnDrop(PointerEventData eventData)
     {
         if (eventData.pointerDrag != null)
         {
+            gridLayoutGroup = this.GetComponent<GridLayoutGroup>();
             slotedIngredient = eventData.pointerDrag;
-            slotedIngredient.GetComponent<RectTransform>().position = this.GetComponent<RectTransform>().position;
+            slotedIngredient.transform.SetParent(this.GetComponent<GridLayoutGroup>().transform);
 
             id_potion_toSpawn = slotedIngredient.gameObject.GetComponent<Ingredient>().id_ingredient;
 
@@ -38,6 +41,14 @@ public class Slot : MonoBehaviour, IDropHandler
                 canSpawnPotion = false;
             }
             indexPotionIngredients += 1;
+            if (gridLayoutGroup.transform.childCount == 3)
+            {
+                for (int i = 0; i < gridLayoutGroup.transform.childCount; i++)
+                {
+                    Debug.Log("hola");
+                    Destroy(gridLayoutGroup.transform.GetChild(i).gameObject);
+                }
+            }
         }
         if (indexPotionIngredients == 3 && canSpawnPotion)
         {
