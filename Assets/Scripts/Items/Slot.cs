@@ -12,10 +12,12 @@ public class Slot : MonoBehaviour, IDropHandler
 {
     GameObject slotedIngredient;
     List<int> idsPotionsFromIngredients = new List<int>();
+    List<int> idsIngredientsForCheck = new List<int>();
     [SerializeField] GameObject result;
 
     int id_potion_toSpawn;
     bool canSpawnPotion;
+    bool isntSame;
     int indexPotionIngredients;
     GridLayoutGroup gridLayoutGroup;
     public void OnDrop(PointerEventData eventData)
@@ -27,40 +29,46 @@ public class Slot : MonoBehaviour, IDropHandler
             slotedIngredient.transform.SetParent(this.GetComponent<GridLayoutGroup>().transform);
 
             id_potion_toSpawn = slotedIngredient.gameObject.GetComponent<Ingredient>().id_ingredient;
+            idsIngredientsForCheck.Add(slotedIngredient.gameObject.GetComponent<Ingredient>().id_ingredient);
 
             idsPotionsFromIngredients.Add(DBManager._DB_MANAGER.CheckIdPotionFromIngredientDropped(id_potion_toSpawn));
 
             canSpawnPotion = false;
-            //Comparar la lista que si los numeros de dentro son los mismos pues podemos spawnear la pocion con esa id
-            if (CheckRecipe(idsPotionsFromIngredients))
+            isntSame = false;
+
+            if (CheckIdsIngredients(idsIngredientsForCheck) && CheckRecipe(idsPotionsFromIngredients))
             {
                 canSpawnPotion = true;
+                isntSame = true;
             }
             else
             {
                 canSpawnPotion = false;
+                isntSame = false;
             }
             indexPotionIngredients += 1;
             if (gridLayoutGroup.transform.childCount == 3)
             {
                 for (int i = 0; i < gridLayoutGroup.transform.childCount; i++)
                 {
-                    Debug.Log("hola");
                     Destroy(gridLayoutGroup.transform.GetChild(i).gameObject);
                 }
             }
         }
-        if (indexPotionIngredients == 3 && canSpawnPotion)
+        if (indexPotionIngredients == 3 && canSpawnPotion && isntSame)
         {
             indexPotionIngredients = 0;
             canSpawnPotion = false;
+            isntSame = false;
             result.gameObject.GetComponent<Result>().SpawnPotion(idsPotionsFromIngredients[0]);
             idsPotionsFromIngredients.Clear();
+            idsIngredientsForCheck.Clear();
         }
-        else if (indexPotionIngredients == 3 && !canSpawnPotion)
+        else if (indexPotionIngredients == 3 && !canSpawnPotion && !isntSame)
         {
             indexPotionIngredients = 0;
             idsPotionsFromIngredients.Clear();
+            idsIngredientsForCheck.Clear();
         }
     }
 
@@ -72,5 +80,10 @@ public class Slot : MonoBehaviour, IDropHandler
             if (num != primerNumero)
                 return false;
         return true;
+    }
+    bool CheckIdsIngredients(List<int> numeros)
+    {
+        HashSet<int> numerosUnicos = new HashSet<int>(numeros);
+        return numerosUnicos.Count == numeros.Count;
     }
 }
