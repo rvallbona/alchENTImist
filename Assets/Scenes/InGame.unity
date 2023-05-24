@@ -4929,7 +4929,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "1.Pocion Antidoto de veneno:\r\n\t1.Ojo de rana\r\n\t2.Pelo de caballo\r\n\t3.Pluma
+  m_text: "1.Pocion Antidoto de veneno:\r\n\tOjo de rana\r\n\t2.Pelo de caballo\r\n\t3.Pluma
     de pajaro\r\n2.Pocion Curacion\r:\n\t4.U\xF1a humana\r\n\t5.Oro puro\r\n\t6.Hilo
     de lana\r\n3.Pocion Hoja afilada:\r\n\t7.Berruga de otro\r\n\t8.Pata de pollo\r\n\t9.Cera
     de oido\r\n4.Pocion Rapidez Mortal:\r\n\t10.Azucar\r\n\t11.Veneno de serpiente\r\n\t12.Cola
@@ -7429,6 +7429,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   potionPrefab: {fileID: 9100488338292330422, guid: 80c5b6fb7a738a54f9a5989fa4066bc0, type: 3}
   winManagerGO: {fileID: 287766711}
+  listCharger: 0
 --- !u!114 &1615750074
 MonoBehaviour:
   m_ObjectHideFlags: 0

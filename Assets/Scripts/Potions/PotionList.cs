@@ -14,6 +14,8 @@ public class PotionList : MonoBehaviour
 
     GridLayoutGroup orderGridGroup;
 
+    public bool listCharger = false;
+
     void Start()
     {
         ids_potions = DBManager._DB_MANAGER.GetPotionsIDList();
@@ -23,46 +25,16 @@ public class PotionList : MonoBehaviour
         {
             names_potions.Add(DBManager._DB_MANAGER.GetNamePotion(ids_potions[i]));
         }
-
-        if (winManager.indexOrdersDone == 1)
-        {
-            InstantiateOrderPotion(0);
-            InstantiateOrderPotion(1);
-        }
+        listCharger = true;
     }
-    private void Update()
+    public void InstantiateOrderPotion(int id_potion)
     {
-        Debug.Log(winManager.indexOrdersDone);
-
-        if (winManager.indexOrdersDone == 2)
+        if (GameObject.FindGameObjectWithTag("ListaPociones") != null)
         {
-            for (int i = 0; i < orderGridGroup.transform.childCount; i++)
-            {
-                Destroy(orderGridGroup.transform.GetChild(i).gameObject);
-            }
-
-            InstantiateOrderPotion(2);
-            InstantiateOrderPotion(3);
+            GameObject newPotion = Instantiate(potionPrefab, transform.position, transform.rotation) as GameObject;
+            newPotion.transform.SetParent(GameObject.FindGameObjectWithTag("ListaPociones").transform, false);
+            TextMeshProUGUI newName = newPotion.GetComponent<TextMeshProUGUI>();
+            newName.text = names_potions[id_potion];
         }
-
-        if (winManager.indexOrdersDone == 3)
-        {
-
-            for (int i = 0; i < orderGridGroup.transform.childCount; i++)
-            {
-                Destroy(orderGridGroup.transform.GetChild(i).gameObject);
-            }
-
-            InstantiateOrderPotion(3);
-            InstantiateOrderPotion(1);
-        }
-
-    }
-    void InstantiateOrderPotion(int id_potion)
-    {
-        GameObject newPotion = Instantiate(potionPrefab, transform.position, transform.rotation) as GameObject;
-        newPotion.transform.SetParent(GameObject.FindGameObjectWithTag("ListaPociones").transform, false);
-        TextMeshProUGUI newName = newPotion.GetComponent<TextMeshProUGUI>();
-        newName.text = names_potions[id_potion];
     }
 }
