@@ -20,10 +20,14 @@ public class Slot : MonoBehaviour, IDropHandler
     bool isntSame;
     int indexPotionIngredients;
     GridLayoutGroup gridLayoutGroup;
+
+    [SerializeField] Balance balanceUser;
+
     public void OnDrop(PointerEventData eventData)
     {
         if (eventData.pointerDrag != null)
         {
+            balanceUser.RestBalance(5);
             gridLayoutGroup = this.GetComponent<GridLayoutGroup>();
             slotedIngredient = eventData.pointerDrag;
             slotedIngredient.transform.SetParent(this.GetComponent<GridLayoutGroup>().transform);

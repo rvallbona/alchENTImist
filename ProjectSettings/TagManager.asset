@@ -12,6 +12,7 @@ TagManager:
   - ListaResult
   - Recipie1
   - Recipie2
+  - Balance
   layers:
   - Default
   - TransparentFX

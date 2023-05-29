@@ -65,6 +65,11 @@ public class MainMenuControl : MonoBehaviour
         canvasLoggin.SetActive(false);
         canvasMainMenu.SetActive(true);
     }
+    public void Registred()
+    {
+        canvasLoggin.SetActive(false);
+        canvasRegister.SetActive(true);
+    }
     public void ExitGame()
     {
         Application.Quit();

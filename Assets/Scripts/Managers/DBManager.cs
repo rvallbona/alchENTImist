@@ -78,7 +78,79 @@ public class DBManager : MonoBehaviour
 
         IDataReader dataReader = cmd.ExecuteReader();
     }
+    //------ PLAYER STATS FUNC
+    public string GetUserName(int userId)
+    {
+        OpenDatabase();
 
+        string name = "";
+
+        string query = "SELECT * FROM users WHERE id_user=" + userId.ToString();
+
+        IDbCommand cmd = dbConnection.CreateCommand();
+        cmd.CommandText = query;
+
+        IDataReader dataReader = cmd.ExecuteReader();
+
+        while (dataReader.Read())
+        {
+            name = dataReader.GetString(1);
+        }
+
+        return name;
+    }
+    public float GetPlayerBalance(int userId)
+    {
+        OpenDatabase();
+
+        float balance = 0;
+
+        string query = "SELECT * FROM bank_accounts WHERE id_user=" + userId.ToString();
+
+        IDbCommand cmd = dbConnection.CreateCommand();
+        cmd.CommandText = query;
+
+        IDataReader dataReader = cmd.ExecuteReader();
+
+        while (dataReader.Read())
+        {
+            balance = dataReader.GetFloat(1);
+        }
+
+        return balance;
+    }
+
+    public int GetPlayerLvl(int userId)
+    {
+        OpenDatabase();
+
+        int lvl = 0;
+
+        string query = "SELECT * FROM users WHERE id_user=" + userId.ToString();
+
+        IDbCommand cmd = dbConnection.CreateCommand();
+        cmd.CommandText = query;
+
+        IDataReader dataReader = cmd.ExecuteReader();
+
+        while (dataReader.Read())
+        {
+            lvl = dataReader.GetInt32(3);
+        }
+
+        return lvl;
+    }
+    public void SetPlayerBalance(int userId, float newBalance)
+    {
+        OpenDatabase();
+
+        string query = "UPDATE bank_accounts SET banalce=" + newBalance.ToString() + " WHERE id_user=" + userId.ToString();
+
+        IDbCommand cmd = dbConnection.CreateCommand();
+        cmd.CommandText = query;
+
+        IDataReader dataReader = cmd.ExecuteReader();
+    }
 
     //------ INGREDIENTS FUNC
     public List<int> GetIngredientIDList()

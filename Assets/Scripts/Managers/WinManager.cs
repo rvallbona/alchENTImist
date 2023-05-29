@@ -6,7 +6,8 @@ using UnityEngine.UI;
 
 public class WinManager : MonoBehaviour
 {
-    [HideInInspector]public int indexOrdersDone;
+    [HideInInspector]public int indexOrders;
+    [HideInInspector]public int indexOrdersCorrect;
     public int orderCount;
     [SerializeField] MainMenuControl control;
 
@@ -19,9 +20,15 @@ public class WinManager : MonoBehaviour
     string nameOrderToCompare;
     List<int> ids_potions = new List<int>();
 
+    [SerializeField] Timer time;
+
+    [SerializeField] GameObject BalanceGO;
+    private bool setBlc;
+
     private void Start()
     {
-        indexOrdersDone = 0;
+        indexOrders = 0;
+        setBlc = false;
         slotGroup = slot.gameObject.GetComponent<GridLayoutGroup>();
         orderGroup = order.gameObject.GetComponent<GridLayoutGroup>();
         orders = order.gameObject.GetComponent<PotionList>();
@@ -44,7 +51,7 @@ public class WinManager : MonoBehaviour
         }
         if (nameSlotToCompare == nameOrderToCompare && orders.listCharger)
         {
-            indexOrdersDone += 1;
+            indexOrders += 1;
             //Destruir todos los childs de slot
             for (int i = 0; i < slot.transform.childCount; i++)
             {
@@ -54,29 +61,36 @@ public class WinManager : MonoBehaviour
             {
                 Destroy(order.transform.GetChild(i).gameObject);
             }
-            if (indexOrdersDone == 1)
+            Debug.Log("Entro");
+            if (indexOrders == 1)
             {
                 orders.InstantiateOrderPotion(0);
                 orders.InstantiateOrderPotion(1);
             }
-            else if (indexOrdersDone == 2)
+            else if (indexOrders == 2)
             {
                 orders.InstantiateOrderPotion(2);
                 orders.InstantiateOrderPotion(3);
             }
-            else if (indexOrdersDone == 3)
+            else if (indexOrders == 3)
             {
                 orders.InstantiateOrderPotion(3);
                 orders.InstantiateOrderPotion(1);
             }
             else
             {
-                indexOrdersDone = 0;
+                indexOrders = 0;
             }
         }
 
-        if (indexOrdersDone == orderCount)
+        if (indexOrders == orderCount)
         {
+            if (!setBlc)
+            {
+                BalanceGO.GetComponent<Balance>().SetBalanceForWin(300);
+                setBlc = true;
+            }
+            BalanceGO.GetComponent<Balance>().SetBalanceDB();
             control.ChangeWinCanvas();
         }
     }

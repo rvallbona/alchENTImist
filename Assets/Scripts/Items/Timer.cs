@@ -8,7 +8,7 @@ public class Timer : MonoBehaviour
     [SerializeField] int min, seg;
     TextMeshProUGUI time;
 
-    private float restante;
+    public float restante;
     private bool running;
 
     private void Awake()
@@ -16,6 +16,7 @@ public class Timer : MonoBehaviour
         restante = (min * 60) + seg;
         running = true;
     }
+
     void Start()
     {
         time = this.gameObject.GetComponent<TextMeshProUGUI>();
@@ -23,11 +24,10 @@ public class Timer : MonoBehaviour
 
     void Update()
     {
-        
         if (running)
         {
             restante -= Time.deltaTime;
-            if (restante < 1)
+            if (restante <= 0)
             {
                 running = false;
                 //Cambiar pedido i mostrar que no se ha podido completar el pedido i resetear a 3 mins el temporizador
@@ -36,12 +36,13 @@ public class Timer : MonoBehaviour
             }
             int tempMin = Mathf.FloorToInt(restante / 60);
             int tempSeg = Mathf.FloorToInt(restante % 60);
-            time.text = string.Format("{00:00}:{01:00}", tempMin, tempSeg);
+            time.text = string.Format("{0:00}:{1:00}", tempMin, tempSeg);
         }
     }
+
     void ResetTimer()
     {
-        restante = min * 60;
+        restante = (min * 60) + seg;
         running = true;
     }
 }
